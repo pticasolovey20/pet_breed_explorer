@@ -17,7 +17,9 @@ const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="en">
       <body suppressHydrationWarning className="antialiased">
-        {children}
+        <main className="min-h-screen max-w-screen-xl w-full flex flex-col mx-auto p-4">
+          {children}
+        </main>
       </body>
     </html>
   );

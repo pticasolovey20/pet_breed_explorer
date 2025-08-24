@@ -1,5 +1,7 @@
+import BreedList from "@/components/BreedList";
+
 const HomePage = () => {
-  return <div>INIT</div>;
+  return <BreedList />;
 };
 
 export default HomePage;
