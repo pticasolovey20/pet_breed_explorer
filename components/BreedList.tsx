@@ -2,10 +2,13 @@
 
 import { usePetBreeds } from "@/hooks/usePetBreeds";
 
-import BreedCard from "./BreedCard";
+import BreedSkeletonList from "@/components/BreedSkeletonList";
+import BreedCard from "@/components/BreedCard";
 
 const BreedList = () => {
-  const { breeds } = usePetBreeds();
+  const { breeds, isLoading } = usePetBreeds();
+
+  if (isLoading) return <BreedSkeletonList />;
 
   return (
     <ul className="w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
