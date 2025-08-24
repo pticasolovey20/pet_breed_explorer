@@ -7,7 +7,8 @@ import { useBreedImages } from "@/hooks/useBreedImages";
 import Empty from "@/ui/Empty";
 import { Fragment } from "react";
 import Skeleton from "@/ui/Skeleton";
-import BreedCharacteristicsList from "./BreedCharacteristicsList";
+import BreedGallery from "@/components/BreedGallery";
+import BreedCharacteristicsList from "@/components/BreedCharacteristicsList";
 
 interface BreedDetailsProps {
   id: string;
@@ -16,9 +17,7 @@ interface BreedDetailsProps {
 
 const BreedDetails = ({ id, type }: BreedDetailsProps) => {
   const { breed, isLoading, error } = useBreedDetails(id, type);
-  const { images } = useBreedImages(id, type);
-
-  console.log(images);
+  const { images, isLoading: isImageLoading } = useBreedImages(id, type);
 
   if (!!error) {
     return (
@@ -28,6 +27,23 @@ const BreedDetails = ({ id, type }: BreedDetailsProps) => {
 
   return (
     <div>
+      {isImageLoading || images.length === 0 ? (
+        <Fragment>
+          <Skeleton className="w-full h-[300px] sm:h-[400px] md:h-[500px] mt-4 rounded-lg" />
+
+          <div className="hidden md:flex flex-wrap gap-4 mt-4">
+            {Array.from({ length: 5 }).map((_, index) => (
+              <Skeleton
+                key={index}
+                className="relative flex-shrink-0 w-40 h-40 rounded-xl shadow-lg"
+              />
+            ))}
+          </div>
+        </Fragment>
+      ) : (
+        <BreedGallery images={images} />
+      )}
+
       {isLoading ? (
         <Fragment>
           <Skeleton className="w-[250px] h-10 mt-6" />

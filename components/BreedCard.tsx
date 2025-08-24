@@ -21,7 +21,7 @@ const BreedCard = ({ breed }: BreedCardProps) => {
     >
       <Link
         href={`/breed/${breed.type}/${breed.id}`}
-        title={`Go to ${breed.type} breed details page`}
+        aria-label={`Go to ${breed.type} breed details page`}
         className="w-full h-full flex flex-col"
       >
         <div className="relative shrink-0 h-50 sm:flex-1 bg-gray-200">
