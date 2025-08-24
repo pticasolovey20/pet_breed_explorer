@@ -6,7 +6,7 @@ interface BreedCharacteristicsListProps {
 
 const BreedCharacteristicsList = ({ breed }: BreedCharacteristicsListProps) => {
   return (
-    <ul className="space-y-1 text-lg mt-6">
+    <ul className="space-y-1 text-lg mt-4">
       {breed?.bred_for && (
         <li>
           <span className="font-semibold">Bred for:</span> {breed.bred_for}
