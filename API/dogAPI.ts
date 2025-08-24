@@ -14,6 +14,10 @@ export const fetchDogBreeds = async (): Promise<BreedData[]> => {
     },
   });
 
+  if (!response.ok) {
+    throw new Error(`Failed to fetch dog breeds: ${response.status}`);
+  }
+
   const data = await response.json();
 
   return data.map((dog: BreedData) => ({
@@ -33,6 +37,10 @@ export const fetchDogBreedById = async (id: string): Promise<BreedData> => {
     },
   });
 
+  if (!response.ok) {
+    throw new Error(`Failed to fetch dog breed details: ${response.status}`);
+  }
+
   const data = await response.json();
 
   return data;
@@ -51,6 +59,10 @@ export const fetchDogBreedImages = async (
       "x-api-key": API_KEY,
     },
   });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch dog breed images: ${response.status}`);
+  }
 
   const data = await response.json();
 

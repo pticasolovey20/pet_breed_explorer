@@ -17,4 +17,6 @@ export interface BreedData {
   name: string;
   type: BreadType;
   image: BreedImageData;
+
+  description: string;
 }

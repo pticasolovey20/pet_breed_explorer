@@ -14,6 +14,10 @@ export const fetchCatBreeds = async (): Promise<BreedData[]> => {
     },
   });
 
+  if (!response.ok) {
+    throw new Error(`Failed to fetch cat breeds: ${response.status}`);
+  }
+
   const data = await response.json();
 
   return data.map((cat: BreedData) => ({
@@ -34,6 +38,10 @@ export const fetchCatBreedById = async (id: string): Promise<BreedData> => {
     signal: AbortSignal.timeout(10000),
   });
 
+  if (!response.ok) {
+    throw new Error(`Failed to fetch cat breed details: ${response.status}`);
+  }
+
   const data = await response.json();
 
   return data;
@@ -52,6 +60,10 @@ export const fetchCatBreedImages = async (
       "x-api-key": API_KEY,
     },
   });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch cat breed images: ${response.status}`);
+  }
 
   const data = await response.json();
 
