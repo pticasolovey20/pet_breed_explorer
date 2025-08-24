@@ -32,7 +32,7 @@ const BreedCard = ({ breed }: BreedCardProps) => {
             src={breed.image?.url || "/placeholder.webp"}
             alt={`${breed.name} image`}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover"
+            className="object-cover z-[0]"
           />
         </div>
 
