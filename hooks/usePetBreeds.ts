@@ -71,5 +71,6 @@ export const usePetBreeds = () => {
     breeds,
     isLoading,
     errors,
+    isEmpty: breeds.length === 0,
   };
 };
