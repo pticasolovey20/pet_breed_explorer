@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import { BreedData, BreadsErrorsData } from "@/types/breeds";
 
 import { fetchCatBreeds } from "@/API/catAPI";
 import { fetchDogBreeds } from "@/API/dogAPI";
 
-export const usePetBreeds = () => {
+export const usePetBreeds = (query: string) => {
   const [breeds, setBreeds] = useState<BreedData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<BreadsErrorsData>({
@@ -67,10 +67,18 @@ export const usePetBreeds = () => {
     fetchBreeds();
   }, [fetchBreeds]);
 
+  const filteredBreeds = useMemo(() => {
+    if (!query) return breeds;
+
+    return breeds.filter((breed) => {
+      return breed.name.toLowerCase().includes(query.toLowerCase());
+    });
+  }, [breeds, query]);
+
   return {
-    breeds,
+    breeds: filteredBreeds,
     isLoading,
     errors,
-    isEmpty: breeds.length === 0,
+    isEmpty: filteredBreeds.length === 0,
   };
 };

@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import BreedSearch from "@/components/BreedSearch";
 import BreedList from "@/components/BreedList";
 
 const HomePage = () => {
@@ -8,6 +9,7 @@ const HomePage = () => {
         Breeds list
       </h1>
 
+      <BreedSearch />
       <BreedList />
     </Fragment>
   );

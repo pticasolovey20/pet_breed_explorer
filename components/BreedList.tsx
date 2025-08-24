@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { usePetBreeds } from "@/hooks/usePetBreeds";
 
 import BreedSkeletonList from "@/components/BreedSkeletonList";
@@ -9,7 +10,10 @@ import BreedErrorNotification from "@/components/BreedErrorNotification";
 import BreedCard from "@/components/BreedCard";
 
 const BreedList = () => {
-  const { breeds, isLoading, errors, isEmpty } = usePetBreeds();
+  const searchParams = useSearchParams();
+  const query = searchParams.get("query") || "";
+
+  const { breeds, isLoading, errors, isEmpty } = usePetBreeds(query);
 
   if (isLoading) return <BreedSkeletonList />;
 
