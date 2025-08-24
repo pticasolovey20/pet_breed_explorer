@@ -8,7 +8,7 @@ import { fetchDogBreeds } from "@/API/dogAPI";
 
 export const usePetBreeds = (query: string) => {
   const [breeds, setBreeds] = useState<BreedData[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errors, setErrors] = useState<BreadsErrorsData>({
     cats: null,
     dogs: null,
@@ -79,6 +79,6 @@ export const usePetBreeds = (query: string) => {
     breeds: filteredBreeds,
     isLoading,
     errors,
-    isEmpty: filteredBreeds.length === 0,
+    isEmpty: !isLoading && filteredBreeds.length === 0,
   };
 };

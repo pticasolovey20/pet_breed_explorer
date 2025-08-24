@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useEffect, ChangeEvent, useMemo } from "react";
+import { useState, useRef, useEffect, ChangeEvent, useMemo } from "react";
 import { useDebounce } from "@/hooks/useDebounce";
 import { usePetBreeds } from "@/hooks/usePetBreeds";
 
@@ -13,17 +13,24 @@ const BreedSearch = () => {
 
   const initialQuery = searchParams.get("query") || "";
   const [inputValue, setInputValue] = useState(initialQuery);
-  const debouncedValue = useDebounce(inputValue, 400);
 
+  const isUpdatingFromUrl = useRef(false);
+
+  const debouncedValue = useDebounce(inputValue, 500);
   const { breeds } = usePetBreeds(debouncedValue);
 
   const [isAutoCompleteOpen, setIsAutoCompleteOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    setInputValue(initialQuery);
+    if (initialQuery !== inputValue && !isUpdatingFromUrl.current) {
+      setInputValue(initialQuery);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialQuery]);
 
   useEffect(() => {
+    isUpdatingFromUrl.current = true;
+
     const params = new URLSearchParams(searchParams.toString());
 
     if (debouncedValue) {
@@ -33,6 +40,8 @@ const BreedSearch = () => {
     }
 
     router.push("?" + params.toString());
+
+    setTimeout(() => (isUpdatingFromUrl.current = false), 100);
   }, [debouncedValue, router, searchParams]);
 
   const handleOpenAutoComplete = () => setIsAutoCompleteOpen(true);
@@ -40,7 +49,12 @@ const BreedSearch = () => {
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
-    handleOpenAutoComplete();
+
+    if (event.target.value.trim()) {
+      handleOpenAutoComplete();
+    } else {
+      handleCloseAutoComplete();
+    }
   };
 
   const handleSelect = (breedName: string) => {
