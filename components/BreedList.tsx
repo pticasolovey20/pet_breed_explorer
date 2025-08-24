@@ -2,18 +2,19 @@
 
 import { usePetBreeds } from "@/hooks/usePetBreeds";
 
-const BreedList = () => {
-  const { breeds, errors } = usePetBreeds();
+import Link from "next/link";
 
-  console.log(breeds);
-  console.log(errors);
+const BreedList = () => {
+  const { breeds } = usePetBreeds();
 
   return (
     <ul className="w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {breeds.map(({ id, name }) => (
+      {breeds.map(({ id, name, type }) => (
         <li key={id} className="min-w-0 sm:aspect-square">
           <div className="w-full h-full border">
-            <span>{name}</span>
+            <Link href={`/breed/${type}/${id}`}>
+              <span>{name}</span>
+            </Link>
           </div>
         </li>
       ))}
