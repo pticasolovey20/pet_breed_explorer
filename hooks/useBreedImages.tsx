@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { BreadType, BreedImageData } from "@/types/breeds";
 
 import { fetchCatBreedImages } from "@/API/catAPI";
@@ -15,7 +15,7 @@ export const useBreedImages = (
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchImages = async () => {
+  const fetchImages = useCallback(async () => {
     if (!breedId || !breedType) return;
 
     setIsLoading(true);
@@ -37,12 +37,11 @@ export const useBreedImages = (
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [breedId, breedType, limit]);
 
   useEffect(() => {
     fetchImages();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fetchImages]);
 
   return {
     images,

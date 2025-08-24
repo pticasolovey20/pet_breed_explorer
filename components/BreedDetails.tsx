@@ -13,6 +13,7 @@ const BreedDetails = ({ id, type }: BreedDetailsProps) => {
   const { breed } = useBreedDetails(id, type);
   const { images } = useBreedImages(id, type);
 
+  console.log(breed);
   console.log(images);
 
   return (

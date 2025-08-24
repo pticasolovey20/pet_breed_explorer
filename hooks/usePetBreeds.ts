@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { BreedData, BreadsErrorsData } from "@/types/breeds";
 
 import { fetchCatBreeds } from "@/API/catAPI";
@@ -14,7 +14,7 @@ export const usePetBreeds = () => {
     dogs: null,
   });
 
-  const loadBreeds = async () => {
+  const fetchBreeds = useCallback(async () => {
     setIsLoading(true);
     setErrors({
       cats: null,
@@ -51,7 +51,6 @@ export const usePetBreeds = () => {
 
       setBreeds(sortedBreeds);
       setErrors(newErrors);
-      setIsLoading(false);
     } catch (error) {
       console.error("Unexpected error during breeds loading:", error);
 
@@ -62,11 +61,11 @@ export const usePetBreeds = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    loadBreeds();
-  }, []);
+    fetchBreeds();
+  }, [fetchBreeds]);
 
   return {
     breeds,
