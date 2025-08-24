@@ -1,3 +1,5 @@
+import BreedDetails from "@/components/BreedDetails";
+
 interface BreedDetailPageProps {
   params: Promise<{
     type: "cat" | "dog";
@@ -6,11 +8,9 @@ interface BreedDetailPageProps {
 }
 
 const BreedDetailPage = async ({ params }: BreedDetailPageProps) => {
-  const { type, id } = await params;
+  const { id, type } = await params;
 
-  console.log({ type, id });
-
-  return <div>BreedDetailPage</div>;
+  return <BreedDetails id={id} type={type} />;
 };
 
 export default BreedDetailPage;

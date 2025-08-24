@@ -3,8 +3,12 @@ export interface BreadsErrorsData {
   dogs: string | null;
 }
 
+export type BreadType = "cat" | "dog";
+
 export interface BreedData {
   id: string | number;
   name: string;
-  type: "cat" | "dog";
+  type: BreadType;
 }
+
+export interface BreedDetailData {}

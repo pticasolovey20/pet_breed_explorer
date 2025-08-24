@@ -1,0 +1,22 @@
+"use client";
+
+import { BreadType } from "@/types/breeds";
+import { useBreedDetails } from "@/hooks/useBreedDetails";
+
+interface BreedDetailsProps {
+  id: string;
+  type: BreadType;
+}
+
+const BreedDetails = ({ id, type }: BreedDetailsProps) => {
+  const { breed } = useBreedDetails(id, type);
+
+  return (
+    <div>
+      <h1>{breed?.name}</h1>
+      <h2>{type}</h2>
+    </div>
+  );
+};
+
+export default BreedDetails;

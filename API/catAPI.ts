@@ -21,3 +21,20 @@ export const fetchCatBreeds = async (): Promise<BreedData[]> => {
     type: "cat" as const,
   }));
 };
+
+export const fetchCatBreedById = async (id: string): Promise<BreedData> => {
+  const URL = `${BASE_URL}/breeds/${id}`;
+
+  const response = await fetch(URL, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-key": API_KEY,
+    },
+    signal: AbortSignal.timeout(10000),
+  });
+
+  const data = await response.json();
+
+  return data;
+};
