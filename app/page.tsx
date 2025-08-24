@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, Suspense } from "react";
 import BreedSearch from "@/components/BreedSearch";
 import BreedList from "@/components/BreedList";
 
@@ -9,8 +9,13 @@ const HomePage = () => {
         Breeds list
       </h1>
 
-      <BreedSearch />
-      <BreedList />
+      <Suspense>
+        <BreedSearch />
+      </Suspense>
+
+      <Suspense>
+        <BreedList />
+      </Suspense>
     </Fragment>
   );
 };
