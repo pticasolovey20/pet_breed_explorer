@@ -2,6 +2,7 @@
 
 import { BreadType } from "@/types/breeds";
 import { useBreedDetails } from "@/hooks/useBreedDetails";
+import { useBreedImages } from "@/hooks/useBreedImages";
 
 interface BreedDetailsProps {
   id: string;
@@ -10,6 +11,9 @@ interface BreedDetailsProps {
 
 const BreedDetails = ({ id, type }: BreedDetailsProps) => {
   const { breed } = useBreedDetails(id, type);
+  const { images } = useBreedImages(id, type);
+
+  console.log(images);
 
   return (
     <div>
