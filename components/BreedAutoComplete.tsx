@@ -26,17 +26,19 @@ const BreedAutoComplete = ({
         )}
       />
 
-      <ul className="absolute top-12 w-full border rounded-lg shadow-lg bg-background z-[20]">
-        {autoCompleteList.map((breed) => (
-          <li
-            key={breed.id}
-            onClick={() => handleSelect(breed.name)}
-            className="px-4 py-2 cursor-pointer hover:bg-accent/20"
-          >
-            {breed.name}
-          </li>
-        ))}
-      </ul>
+      <div className="absolute top-12 flex w-full max-h-[500px] border rounded-lg shadow-lg bg-background z-[20] overflow-hidden">
+        <ul className="flex-1 overflow-y-auto">
+          {autoCompleteList.map((breed) => (
+            <li
+              key={breed.id}
+              onClick={() => handleSelect(breed.name)}
+              className="px-4 py-2 cursor-pointer hover:bg-accent/20"
+            >
+              {breed.name}
+            </li>
+          ))}
+        </ul>
+      </div>
     </Fragment>
   );
 };

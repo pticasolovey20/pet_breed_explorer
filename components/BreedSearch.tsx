@@ -65,13 +65,9 @@ const BreedSearch = () => {
   const autoCompleteList = useMemo(() => {
     if (!debouncedValue.trim()) return [];
 
-    return breeds
-      .filter((breed) => {
-        return breed.name
-          .toLowerCase()
-          .startsWith(debouncedValue.toLowerCase());
-      })
-      .slice(0, 5);
+    return breeds.filter((breed) => {
+      return breed.name.toLowerCase().startsWith(debouncedValue.toLowerCase());
+    });
   }, [breeds, debouncedValue]);
 
   return (

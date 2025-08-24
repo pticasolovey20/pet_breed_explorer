@@ -71,7 +71,7 @@ export const usePetBreeds = (query: string) => {
     if (!query) return breeds;
 
     return breeds.filter((breed) => {
-      return breed.name.toLowerCase().includes(query.toLowerCase());
+      return breed.name.toLowerCase().startsWith(query.toLowerCase());
     });
   }, [breeds, query]);
 
