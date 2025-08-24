@@ -7,6 +7,7 @@ import { useBreedImages } from "@/hooks/useBreedImages";
 import Empty from "@/ui/Empty";
 import { Fragment } from "react";
 import Skeleton from "@/ui/Skeleton";
+import BreedCharacteristicsList from "./BreedCharacteristicsList";
 
 interface BreedDetailsProps {
   id: string;
@@ -46,6 +47,19 @@ const BreedDetails = ({ id, type }: BreedDetailsProps) => {
             </p>
           )}
         </Fragment>
+      )}
+
+      {isLoading ? (
+        <Fragment>
+          <Skeleton className="w-[250px] h-8 mt-3" />
+          <Skeleton className="w-[300px] h-8 mt-3" />
+          <Skeleton className="w-[240px] h-8 mt-3" />
+          <Skeleton className="w-[380px] h-8 mt-3" />
+          <Skeleton className="w-[310px] h-8 mt-3" />
+          <Skeleton className="w-[270px] h-8 mt-3" />
+        </Fragment>
+      ) : (
+        <BreedCharacteristicsList breed={breed!} />
       )}
     </div>
   );

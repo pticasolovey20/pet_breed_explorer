@@ -19,4 +19,11 @@ export interface BreedData {
   image: BreedImageData;
 
   description: string;
+  bred_for: string;
+  breed_group: string;
+  height: { imperial: string; metric: string };
+  weight: { imperial: string; metric: string };
+  life_span: string;
+  origin: string;
+  temperament: string;
 }
